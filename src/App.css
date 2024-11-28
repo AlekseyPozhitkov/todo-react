@@ -25,17 +25,6 @@ body {
   padding-bottom: 32px;
 }
 
-.important-btn {
-  margin-right: 5px;
-  width: 20px;
-  border-width: 1px;
-  border-radius: 49%;
-  padding: 1px;
-  border-color: white;
-  color: white;
-  background: transparent;
-}
-
 h1 {
   margin: 32px 0;
   font-size: 33px;
@@ -45,7 +34,8 @@ h1 {
   text-decoration: line-through;
 }
 
-.todo-form {
+.todo-form,
+.todo-filter {
   margin-bottom: 32px;
 }
 
@@ -91,6 +81,7 @@ h1 {
 
 .iconsContainer {
   display: flex;
+  gap: 10px;
   align-items: center;
   font-size: 24px;
   cursor: pointer;
@@ -101,4 +92,25 @@ h1 {
   width: 80%;
   align-self: center;
   background-color: black;
+}
+
+.todo-row-main.editing {
+  color: black;
+  background-color: #f0f8ff;
+  border-radius: 4px;
+  padding: 2px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.todo-filter {
+  padding: 3px;
+  border-radius: 4px;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
 }
