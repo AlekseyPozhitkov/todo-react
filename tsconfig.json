@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES6", // Поддержка ES6
+    "lib": ["DOM", "DOM.Iterable", "ESNext"], // Библиотеки для React и современных возможностей JS
+    "allowJs": true, // Разрешить использование JS-файлов
+    "skipLibCheck": true, // Пропуск проверки типов в библиотеках
+    "esModuleInterop": true, // Совместимость с ES модулями
+    "allowSyntheticDefaultImports": true, // Разрешить синтетические импорты
+    "strict": true, // Включить строгую типизацию
+    "noImplicitAny": true, // Запрет неявного использования any
+    "strictNullChecks": true, // Проверка на null и undefined
+    "forceConsistentCasingInFileNames": true, // Учитывать регистр в именах файлов
+    "module": "ESNext", // Использование модулей ES
+    "moduleResolution": "Node", // Разрешение модулей через Node.js
+    "resolveJsonModule": true, // Разрешить импорт JSON
+    "isolatedModules": true, // Поддержка изолированных модулей (требуется для CRA)
+    "jsx": "react-jsx" // Поддержка нового JSX синтаксиса React
+  },
+  "include": ["src"], // Указать директорию, где искать файлы
+  "exclude": ["node_modules"] // Исключить папки из компиляции
+}
