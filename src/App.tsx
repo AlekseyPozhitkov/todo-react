@@ -8,12 +8,11 @@ interface ITodo {
   id: number;
   task: string;
   completed: boolean;
-  date: number;
 }
 
 function App() {
   const [todos, setTodos] = useState<ITodo[]>([]);
-  const [sort, setSort] = useState("date");
+  const [filter, setFilter] = useState("all");
 
   const addTask = (userInput: string): void => {
     if (userInput) {
@@ -21,7 +20,6 @@ function App() {
         id: Date.now(),
         task: userInput,
         completed: false,
-        date: Date.now(),
       };
 
       setTodos([...todos, newTask]);
@@ -44,12 +42,10 @@ function App() {
     setTodos(todos.map((todo) => (todo.id === id ? { ...todo, task: updatedTask } : todo)));
   };
 
-  const sortedTodos = todos.sort((a, b) => {
-    if (sort === "task") {
-      return a.task.localeCompare(b.task);
-    } else {
-      return a.date - b.date;
-    }
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "completed") return todo.completed;
+    if (filter === "incomplete") return !todo.completed;
+    return true; // "all" показывает все задачи
   });
 
   return (
@@ -57,10 +53,10 @@ function App() {
       <h1>Todo List</h1>
       <div className="header-container">
         <TodoForm addTask={addTask} />
-        <TodoFilter sort={sort} setSort={setSort} />
+        <TodoFilter filter={filter} setFilter={setFilter} />
       </div>
       <hr className="separator" />
-      {sortedTodos.map((todo) => (
+      {filteredTodos.map((todo) => (
         <TodoItem
           todo={todo}
           key={todo.id}
