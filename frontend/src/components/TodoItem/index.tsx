@@ -2,16 +2,16 @@ import { KeyboardEvent, useEffect, useRef, useState } from "react";
 import { RiCheckFill, RiCloseCircleLine, RiEditLine } from "react-icons/ri";
 
 interface ITodo {
-  id: number;
+  id: string;
   task: string;
   completed: boolean;
 }
 
 interface ITodoItem {
   todo: ITodo;
-  toggleTask: (id: number) => void;
-  removeTask: (id: number) => void;
-  editTask: (id: number, updatedTask: string) => void;
+  toggleTask: (id: string, completed: boolean) => void;
+  removeTask: (id: string) => void;
+  editTask: (id: string, updatedTask: string) => void;
 }
 
 export const TodoItem = ({ todo, toggleTask, removeTask, editTask }: ITodoItem) => {
@@ -60,7 +60,7 @@ export const TodoItem = ({ todo, toggleTask, removeTask, editTask }: ITodoItem) 
         contentEditable={isEditing}
         suppressContentEditableWarning={true}
         onClick={() => {
-          if (!isEditing) toggleTask(todo.id);
+          if (!isEditing) toggleTask(todo.id, !todo.completed);
         }}
         onKeyDown={isEditing ? handleKeyDown : undefined}
       >
