@@ -14,15 +14,19 @@ interface ITodo {
 function App() {
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [filter, setFilter] = useState("all");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchTodos = async () => {
       try {
+        setIsLoading(true);
         const fetchedTodos = await getTodos();
 
         setTodos(fetchedTodos);
       } catch (error) {
         console.error("Ошибка при загрузке задач:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -92,6 +96,8 @@ function App() {
       </div>
 
       <hr className="separator" />
+      {isLoading && <p>Loading...</p>}
+      {!isLoading && !filteredTodos.length && <p style={{ fontSize: "3rem" }}>No tasks yet</p>}
       {filteredTodos.map((todo) => (
         <TodoItem
           todo={todo}
