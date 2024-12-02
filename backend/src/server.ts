@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -16,14 +16,14 @@ app.use(express.json());
 app.use("/api/todos", todoRoutes);
 
 // Подключение к MongoDB
-const DB_URI = process.env.MONGO_URI || "your-default-mongo-uri";
+const DB_URI = process.env.MONGO_URI || "";
 mongoose
   .connect(DB_URI)
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Error connecting to MongoDB", err));
 
 // Роут для проверки
-app.get("/", (req: Request, res: Response) => {
+app.get("/", (req, res) => {
   res.send("Server is running");
 });
 

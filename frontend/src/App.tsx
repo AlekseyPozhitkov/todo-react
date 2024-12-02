@@ -4,6 +4,7 @@ import { TodoForm } from "./components/TodoForm";
 import { TodoItem } from "./components/TodoItem";
 import { TodoFilter } from "./components/TodoFilter";
 import { createTodo, deleteTodo, getTodos, updateTodo } from "./api/todoApi";
+import { AxiosError } from "axios";
 
 interface ITodo {
   id: string;
@@ -14,15 +15,23 @@ interface ITodo {
 function App() {
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [filter, setFilter] = useState("all");
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<AxiosError | null>(null);
 
   useEffect(() => {
     const fetchTodos = async () => {
       try {
+        setIsLoading(true);
         const fetchedTodos = await getTodos();
 
         setTodos(fetchedTodos);
       } catch (error) {
+        if (error instanceof AxiosError) {
+          setError(error);
+        }
         console.error("Ошибка при загрузке задач:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -92,6 +101,11 @@ function App() {
       </div>
 
       <hr className="separator" />
+      {error && <p>{error.message}</p>}
+      {isLoading && <p>Loading...</p>}
+      {!error && !isLoading && !filteredTodos.length && (
+        <p style={{ fontSize: "3rem" }}>No tasks yet</p>
+      )}
       {filteredTodos.map((todo) => (
         <TodoItem
           todo={todo}
