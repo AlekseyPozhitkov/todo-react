@@ -22,7 +22,6 @@ function App() {
     const fetchTodos = async () => {
       try {
         setIsLoading(true);
-        setIsLoading(true);
         const fetchedTodos = await getTodos();
 
         setTodos(fetchedTodos);
